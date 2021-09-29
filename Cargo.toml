@@ -1,0 +1,18 @@
+[package]
+name = "rhostman"
+version = "0.1.0"
+authors = ["damjack <giacomello.damiano@gmail.com>"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/damjack/rhostman"
+repository = "https://github.com/damjack/rhostman"
+keywords = ["cli", "hosts", "ads", "blocking"]
+categories = ["command-line-utilities"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+structopt = { version = "0.3", features = [ "paw" ] }
+paw = "1.0"
+validator = "0.11.0"
