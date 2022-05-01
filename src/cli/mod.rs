@@ -12,8 +12,8 @@ pub const ETC_HOSTS: &str = "/etc/hosts";
 #[clap(name = "rhostname")]
 #[clap(version, about = "A CLI to manage hosts file", long_about = None)]
 pub struct Cli {
-    #[clap(short, long, default_value = ETC_HOSTS)]
-    pub path: String,
+    #[clap(short, long, default_value = ETC_HOSTS, parse(from_os_str))]
+    pub path: PathBuf,
     #[clap(subcommand)]
     pub commands: Command,
 }
@@ -22,43 +22,28 @@ pub struct Cli {
 pub enum Command {
     #[clap(arg_required_else_help = true)]
     Import {
-        #[clap(required = true, parse(from_os_str))]
-        url: PathBuf,
+        #[clap(required = true)]
+        raw_url: String,
     },
     #[clap(arg_required_else_help = true)]
     Add {
-        #[clap(required = true, parse(from_os_str))]
-        input: Vec<PathBuf>,
-        #[clap(short, long)]
-        inline: bool,
-        #[clap(short = 'H', long)]
-        host: Option<String>,
-    },
-    #[clap(arg_required_else_help = true)]
-    Check {
-        #[clap(short = 'H', long)]
-        host: Option<String>,
+        #[clap(required = true)]
+        hosts: Vec<String>,
     },
     #[clap(arg_required_else_help = true)]
     Remove {
-        #[clap(short = 'H', long)]
-        host: bool,
-        #[clap(short, long)]
-        address: bool,
-        #[clap(required = true, parse(from_os_str))]
-        input: PathBuf,
+        #[clap(required = true)]
+        host: String,
     },
     #[clap(arg_required_else_help = true)]
     Disable {
-        #[clap(short, long)]
-        search: bool,
-        #[clap(required = true, parse(from_os_str))]
-        input: PathBuf,
+        #[clap(required = true)]
+        host: String,
     },
     #[clap(arg_required_else_help = true)]
     Backup {
         #[clap(required = true, parse(from_os_str))]
-        input: PathBuf,
+        backup_file: PathBuf,
     },
 }
 
