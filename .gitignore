@@ -1,2 +1,5 @@
+### Local
+.tool-versions
+
+### Custom Rust Project
 /target
-Cargo.lock
