@@ -1,5 +1,6 @@
 ### Ahother command line tool for managing your hosts file
 
+- check and read host
 - add new entry host
 - remove host
 - disable single host
@@ -14,6 +15,7 @@ $ cargo install rhostman
 
 #### Usage
 ```bash
+$ rhostman check [-r] [--path=PATH]
 $ rhostman add [-fqbcvq] [--force] [--path=PATH]
                 ( [ENTRY ...] | [--input-file=FILE] | [--input-url=URL] )
 $ rhostman remove [-qbcvq] ([--address=<address>] [--names=<names>]) [--path=PATH]

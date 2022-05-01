@@ -1,0 +1,13 @@
+services:
+  cli:
+    build:
+      context: .
+    container_name: rhostman
+    volumes:
+      - .:/code:delegated
+    working_dir: /code
+
+version: '3.7'
+
+volumes:
+  code: {}

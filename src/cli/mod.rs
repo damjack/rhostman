@@ -1,54 +1,60 @@
+use clap::{Parser, Subcommand};
 use std::error::Error;
 use std::fmt;
 use std::fmt::Display;
 use std::fmt::Formatter;
 use std::path::PathBuf;
-use structopt::StructOpt;
 
-#[derive(StructOpt, Debug)]
-#[structopt(about = "the host mnager")]
+#[derive(Parser, Debug)]
+#[clap(name = "rhostname")]
+#[clap(about = "A CLI to manage hosts file", long_about = None)]
 pub struct Cli {
-    #[structopt(short, long)]
+    #[clap(short, long)]
     pub path: Option<String>,
-    #[structopt(subcommand)]  // Note that we mark a field as a subcommand
+    #[clap(subcommand)]
     pub commands: Command,
 }
 
-#[derive(StructOpt, Debug)]
+#[derive(Debug, Subcommand)]
 pub enum Command {
-    #[structopt(name = "import")]
+    #[clap(arg_required_else_help = true)]
     Import {
-        #[structopt(parse(from_os_str))]
+        #[clap(required = true, parse(from_os_str))]
         url: PathBuf,
     },
-    #[structopt(name = "add")]
+    #[clap(arg_required_else_help = true)]
     Add {
-        #[structopt(parse(from_os_str))]
+        #[clap(required = true, parse(from_os_str))]
         input: Vec<PathBuf>,
-        #[structopt(short, long)]
+        #[clap(short, long)]
         inline: bool,
-        #[structopt(short, long)]
+        #[clap(short, long)]
         host: Option<String>,
     },
-    #[structopt(name = "remove")]
+    #[clap(arg_required_else_help = true)]
+    Check {
+        #[clap(short, long)]
+        host: Option<String>,
+    },
+    #[clap(arg_required_else_help = true)]
     Remove {
-        #[structopt(short, long, required_unless("address"))]
+        #[clap(short, long, required_unless("address"))]
         host: bool,
-        #[structopt(short, long, required_unless("host"))]
+        #[clap(short, long, required_unless("host"))]
         address: bool,
-        #[structopt(parse(from_os_str))]
+        #[clap(required = true, parse(from_os_str))]
         input: PathBuf,
     },
-    #[structopt(name = "disable")]
+    #[clap(arg_required_else_help = true)]
     Disable {
-        #[structopt(short, long)]
+        #[clap(short, long)]
         search: bool,
-        #[structopt(parse(from_os_str))]
+        #[clap(required = true, parse(from_os_str))]
         input: PathBuf,
     },
-    #[structopt(name = "backup")]
+    #[clap(arg_required_else_help = true)]
     Backup {
-        #[structopt(parse(from_os_str))]
+        #[clap(required = true, parse(from_os_str))]
         input: PathBuf,
     },
 }

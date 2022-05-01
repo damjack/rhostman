@@ -1,18 +1,25 @@
 [package]
 name = "rhostman"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["damjack <giacomello.damiano@gmail.com>"]
-license = "MIT OR Apache-2.0"
+license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/damjack/rhostman"
 repository = "https://github.com/damjack/rhostman"
 keywords = ["cli", "hosts", "ads", "blocking"]
 categories = ["command-line-utilities"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-structopt = { version = "0.3", features = [ "paw" ] }
-paw = "1.0"
-validator = "0.11.0"
+clap = { version = "3.1.14", features = ["derive"] }
+reqwest = { version = "0.11.9", features = ["json"], optional = true }
+serde = { version = "1.0.136", features = ["derive"] }
+serde_json = "1.0.78"
+tokio = { version = "1.16.1", features = ["macros", "rt-multi-thread"], optional = true }
+validator = "0.14.0"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
