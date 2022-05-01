@@ -17,42 +17,27 @@ command = "cargo"
 args = ["test", "--features", "gzip"]
 dependencies = ["build"]
 
-[tasks.clippy]
+[tasks.format]
+description = "Runs the cargo rustfmt plugin during CI."
 command = "cargo"
-args = ["clippy", "--all-features", "--", "-D", "warnings"]
+args = ["fmt", "--all"]
 
-### with cargo-limit installed
-[tasks.lbuild]
-description = "Runs the rust compiler."
-category = "Build"
-install_crate = false
-command = "cargo"
-args = [
-    "lbuild",
-    "@@remove-empty(CARGO_MAKE_CARGO_VERBOSE_FLAGS)",
-    "@@split(CARGO_MAKE_CARGO_BUILD_TEST_FLAGS, )",
-]
-
-[tasks.ltest]
-dependencies = ["ltest-async"]
-
-[tasks.ltest-async]
-command = "cargo"
-args = ["ltest"]
-dependencies = ["lbuild"]
-
-[tasks.clean]
-command = "cargo"
-args = ["clean"]
-
-[tasks.format-ci]
+[tasks.format-check]
 description = "Runs the cargo rustfmt plugin during CI."
 command = "cargo"
 args = ["fmt", "--all", "--", "--check"]
 
-[tasks.clippy-ci]
+[tasks.clippy]
+command = "cargo"
+args = ["clippy", "--all-features", "--", "-D", "warnings"]
+
+[tasks.clippy-check]
 command = "cargo"
 args = ["clippy", "--", "-D", "warnings"]
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
 
 [tasks.build-ci]
 description = "Build inside CI."
