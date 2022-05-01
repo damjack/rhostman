@@ -1,4 +1,6 @@
-use crate::cli::{Cli, CliError, Command};
+use clap::Parser;
+
+use crate::cli::{Cli, Command};
 
 pub mod cli;
 pub mod commands;
@@ -12,25 +14,22 @@ fn main() {
 }
 
 fn handle_subcommand(opt: Cli) {
-    let file_data = utils::get_base_file(opt.path);
-    println!("file data {:?}", file_data);
-    // handle subcommands
     match opt.commands {
         Command::Add { input, inline, host } => {
-            commands::add::handle_command(input, inline, host);
+            commands::add::handle_command(opt.path, input, inline, host);
         }
         Command::Check { host } => {
-            commands::check::handle_command(host);
-        },
+            commands::check::handle_command(opt.path, host);
+        }
         Command::Remove { host, address, input } => {
-            commands::remove::handle_command(input, host, address);
+            commands::remove::handle_command(opt.path, input, host, address);
         }
         Command::Import { url } => {
-            commands::import::handle_command(url);
+            commands::import::handle_command(opt.path, url);
         }
         Command::Disable { search, input } => {
-            commands::disable::handle_command(input, search);
+            commands::disable::handle_command(opt.path, input, search);
         }
-        Command::Backup { input } => commands::backup::handle_command(input),
+        Command::Backup { input } => commands::backup::handle_command(opt.path, input),
     }
 }
