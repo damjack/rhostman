@@ -9,7 +9,6 @@ pub mod utils;
 fn main() {
     let args: Cli = Cli::parse();
 
-    println!("Args {:?}", args);
     handle_subcommand(args);
 }
 
