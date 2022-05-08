@@ -1,0 +1,25 @@
+[package]
+name = "rhostman"
+version = "1.0.0"
+authors = ["damjack <giacomello.damiano@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/damjack/rhostman"
+repository = "https://github.com/damjack/rhostman"
+keywords = ["cli", "hosts", "ads", "blocking"]
+categories = ["command-line-utilities"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "3.1.14", features = ["derive"] }
+restson = "^1.2"
+serde = { version = "^1.0", features = ["derive"] }
+serde_json = "^1.0"
+thiserror = { version = "=1.0.30", default-features = false }
+validator = "0.14.0"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
