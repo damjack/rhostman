@@ -1,12 +1,9 @@
 ### Ahother command line tool for managing your hosts file
+[![CircleCI](https://circleci.com/gh/damjack/rhostman/tree/main.svg?style=svg)](https://circleci.com/gh/damjack/rhostman/tree/main)
 
-- check and read host
-- add new entry host
-- remove host
-- disable single host
-- disable hosts with search
-- import from URLs
-- order all hosts into group
+- add/remove new entry host
+- disable single line
+- import RAW data file from URLs
 
 #### How to install
 ```bash
@@ -15,23 +12,16 @@ $ cargo install rhostman
 
 #### Usage
 ```bash
-$ rhostman check [-r] [--path=PATH]
-$ rhostman add [-fqbcvq] [--force] [--path=PATH]
-                ( [ENTRY ...] | [--input-file=FILE] | [--input-url=URL] )
-$ rhostman remove [-qbcvq] ([--address=<address>] [--names=<names>]) [--path=PATH]
-                 [--input-file=FILE] [--input-url=URL]
-$ rhostman --version
+$ rhostman add <HOSTS>
+$ rhostman backup <BACKUP_FILE>
+$ rhostman disable <HOST>
+$ rhostman import <URL>
+$ rhostman remove <HOST>
 ```
 
 #### Options
 ```bash
     -h --help                    show this help message and exit
     --version                    show version and exit
-    --address=ADDRESS            ipv6 or ipv4 address
-    --names=NAMES                host names
     -p --path=PATH               location of hosts file (attempts to detect default)
-    -u --input-url=URL           url of file containing hosts to import
-    -b --backup                  create a backup before each change
 ```
-
-#### Examples

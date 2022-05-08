@@ -22,16 +22,7 @@ description = "Runs the cargo rustfmt plugin during CI."
 command = "cargo"
 args = ["fmt", "--all"]
 
-[tasks.format-check]
-description = "Runs the cargo rustfmt plugin during CI."
-command = "cargo"
-args = ["fmt", "--all", "--", "--check"]
-
 [tasks.clippy]
-command = "cargo"
-args = ["clippy", "--all-features", "--", "-D", "warnings"]
-
-[tasks.clippy-check]
 command = "cargo"
 args = ["clippy", "--", "-D", "warnings"]
 
