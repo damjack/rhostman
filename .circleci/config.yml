@@ -18,10 +18,10 @@ jobs:
       - checkout
       - run:
           name: "Check Format"
-          command: "cargo make format-check"
+          command: "cargo fmt --all -- --check"
       - run:
           name: "Check Clippy"
-          command: "cargo make clippy-check"
+          command: "cargo clippy -- -D warnings"
       - run:
           name: "Check Test"
           command: "exit 0"
