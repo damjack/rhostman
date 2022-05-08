@@ -39,11 +39,6 @@ args = ["clippy", "--", "-D", "warnings"]
 command = "cargo"
 args = ["clean"]
 
-[tasks.build-ci]
-description = "Build inside CI."
-command = "cargo"
-args = ["build", "-j", "2", "--all-features"]
-
 [tasks.cache-cleanup]
 description = "Clean CI cache"
 dependencies = ["cargo-prune", "sweep", "delete-artifacts"]
