@@ -7,7 +7,7 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  format:
+  build:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -18,10 +18,10 @@ jobs:
       - checkout
       - run:
           name: "Check Format"
-          command: "cargo make format-ci"
+          command: "cargo make format-check"
       - run:
           name: "Check Clippy"
-          command: "cargo make clippy-ci"
+          command: "cargo make clippy-check"
       - run:
           name: "Check Test"
           command: "exit 0"
