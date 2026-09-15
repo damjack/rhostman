@@ -24,4 +24,4 @@ jobs:
           command: "cargo clippy -- -D warnings"
       - run:
           name: "Check Test"
-          command: "exit 0"
+          command: "cargo test"
