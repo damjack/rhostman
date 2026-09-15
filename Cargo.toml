@@ -1,6 +1,6 @@
 [package]
 name = "rhostman"
-version = "1.0.0"
+version = "2.0.0"
 authors = ["damjack <giacomello.damiano@gmail.com>"]
 license = "MIT"
 readme = "README.md"
