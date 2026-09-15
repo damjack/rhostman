@@ -1,9 +1,5 @@
 use clap::{Parser, Subcommand};
 
-use std::error::Error;
-use std::fmt;
-use std::fmt::Display;
-use std::fmt::Formatter;
 use std::path::PathBuf;
 
 pub const ETC_HOSTS: &str = "/etc/hosts";
@@ -53,17 +49,4 @@ pub enum Command {
         #[clap(required = true, parse(from_os_str))]
         output: PathBuf,
     },
-}
-
-#[derive(Debug)]
-pub enum CliError {
-    WrongParameters,
-}
-
-impl Error for CliError {}
-
-impl Display for CliError {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self)
-    }
 }
