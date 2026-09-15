@@ -7,7 +7,5 @@ services:
       - .:/code:delegated
     working_dir: /code
 
-version: '3.7'
-
 volumes:
   code: {}
