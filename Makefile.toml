@@ -32,17 +32,12 @@ args = ["clean"]
 
 [tasks.cache-cleanup]
 description = "Clean CI cache"
-dependencies = ["cargo-prune", "sweep", "delete-artifacts"]
+dependencies = ["sweep"]
 
 [tasks.sweep]
 description = "Clean cargo cache with sweep"
 command = "cargo sweep -t 10"
 ignore_errors = true
-
-[tasks.cargo-prune]
-description = "Run cargo prune"
-command = "cargo"
-args = ["prune"]
 
 [tasks.sweep-start]
 description = "Start cargo sweep"
