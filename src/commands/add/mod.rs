@@ -8,7 +8,7 @@ pub fn handle_command(path: PathBuf, hosts: Vec<String>) -> errors::RhostmanResu
 
     for pattern in hosts {
         if search::find_line(&pattern, &content) {
-            println!("{}", &pattern);
+            println!("{}", pattern);
         }
     }
 

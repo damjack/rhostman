@@ -6,7 +6,7 @@ use std::path::PathBuf;
 pub fn handle_command(path: PathBuf, host: String) -> errors::RhostmanResult<()> {
     let content = hosts::hosts_to_string(path)?;
     if search::find_line(&host, &content) {
-        println!("{}", &host);
+        println!("{}", host);
     }
 
     Ok(())
