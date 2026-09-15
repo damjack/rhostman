@@ -1,16 +1,14 @@
-use crate::errors;
-use crate::utils::hosts;
-use crate::utils::search;
 use std::path::PathBuf;
 
-pub fn handle_command(path: PathBuf, hosts: Vec<String>) -> errors::RhostmanResult<()> {
-    let content = hosts::hosts_to_string(path)?;
+use crate::errors::RhostmanResult;
+use crate::hosts_file::io;
 
-    for pattern in hosts {
-        if search::find_line(&pattern, &content) {
-            println!("{}", pattern);
-        }
-    }
+pub fn handle_command(path: PathBuf, ip: String, hosts: Vec<String>, comment: Option<String>) -> RhostmanResult<()> {
+    io::auto_backup(&path)?;
+    let mut doc = io::read(&path)?;
+    doc.add_entry(&ip, &hosts, comment.as_deref())?;
+    io::write_atomic(&path, &doc)?;
 
+    println!("Added {} -> {}", ip, hosts.join(", "));
     Ok(())
 }
