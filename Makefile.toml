@@ -14,7 +14,7 @@ args = [
 
 [tasks.test]
 command = "cargo"
-args = ["test", "--features", "gzip"]
+args = ["test"]
 dependencies = ["build"]
 
 [tasks.format]
