@@ -1,0 +1,6 @@
+target/
+.git/
+.circleci/
+*.md
+Dockerfile
+docker-compose.yml
