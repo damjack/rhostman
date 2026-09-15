@@ -10,4 +10,6 @@ pub enum RhostmanError {
     Io(#[from] std::io::Error),
     #[error(transparent)]
     SerializationError(#[from] serde_json::error::Error),
+    #[error(transparent)]
+    Http(#[from] reqwest::Error),
 }
