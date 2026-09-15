@@ -1,9 +1,9 @@
-FROM rust:1.60 as builder
+FROM rust:1.98.1-bookworm as builder
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=1.60.0
+    RUST_VERSION=1.98.1
 
 WORKDIR /code
 
