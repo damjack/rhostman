@@ -4,7 +4,7 @@ pub type RhostmanResult<T> = Result<T, RhostmanError>;
 
 #[derive(Debug, Error)]
 pub enum RhostmanError {
-    #[error("errore generico: {:?}", .0)]
+    #[error("generic error: {0}")]
     GenericError(String),
     #[error(transparent)]
     Io(#[from] std::io::Error),
