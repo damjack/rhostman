@@ -69,6 +69,52 @@ pub enum Command {
         #[arg(required = true)]
         output: PathBuf,
     },
+    /// Manage tracked remote block-list sources.
+    Track {
+        #[command(subcommand)]
+        action: TrackAction,
+    },
+}
+
+#[derive(Debug, Subcommand, PartialEq)]
+pub enum TrackAction {
+    /// Register a new tracked source and immediately fetch+insert its block.
+    #[command(arg_required_else_help = true)]
+    Add {
+        #[arg(short, long, default_value = ETC_HOSTS)]
+        path: PathBuf,
+        /// Override the tracked-sources config file location.
+        #[arg(long, env = "RHOSTMAN_CONFIG")]
+        config: Option<PathBuf>,
+        #[arg(required = true)]
+        name: String,
+        #[arg(required = true)]
+        url: String,
+    },
+    /// Re-fetch a tracked source and replace just its block in the hosts file.
+    /// Omit NAME to update every tracked source.
+    Update {
+        #[arg(short, long, default_value = ETC_HOSTS)]
+        path: PathBuf,
+        #[arg(long, env = "RHOSTMAN_CONFIG")]
+        config: Option<PathBuf>,
+        name: Option<String>,
+    },
+    /// Stop tracking a source and remove its block from the hosts file.
+    #[command(arg_required_else_help = true)]
+    Remove {
+        #[arg(short, long, default_value = ETC_HOSTS)]
+        path: PathBuf,
+        #[arg(long, env = "RHOSTMAN_CONFIG")]
+        config: Option<PathBuf>,
+        #[arg(required = true)]
+        name: String,
+    },
+    /// List all tracked sources.
+    List {
+        #[arg(long, env = "RHOSTMAN_CONFIG")]
+        config: Option<PathBuf>,
+    },
 }
 
 /// A caller-supplied selector for `remove`/`disable`: exactly one of an
