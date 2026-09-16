@@ -7,6 +7,11 @@
 
 #### How to install
 ```bash
+$ brew install damjack/rhostman/rhostman
+```
+Or download a prebuilt binary for macOS/Linux (arm64 or x86_64) from the
+[releases page](https://github.com/damjack/rhostman/releases). Building from source still works too:
+```bash
 $ cargo install rhostman
 ```
 
