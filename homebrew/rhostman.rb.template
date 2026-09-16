@@ -1,0 +1,36 @@
+class Rhostman < Formula
+  desc "Command line tool for managing your hosts file"
+  homepage "https://github.com/damjack/rhostman"
+  version "VERSION_PLACEHOLDER"
+  license "MIT"
+
+  on_macos do
+    on_arm do
+      url "https://github.com/damjack/rhostman/releases/download/vVERSION_PLACEHOLDER/rhostman-aarch64-apple-darwin.tar.gz"
+      sha256 "SHA_MACOS_ARM_PLACEHOLDER"
+    end
+    on_intel do
+      url "https://github.com/damjack/rhostman/releases/download/vVERSION_PLACEHOLDER/rhostman-x86_64-apple-darwin.tar.gz"
+      sha256 "SHA_MACOS_INTEL_PLACEHOLDER"
+    end
+  end
+
+  on_linux do
+    on_arm do
+      url "https://github.com/damjack/rhostman/releases/download/vVERSION_PLACEHOLDER/rhostman-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "SHA_LINUX_ARM_PLACEHOLDER"
+    end
+    on_intel do
+      url "https://github.com/damjack/rhostman/releases/download/vVERSION_PLACEHOLDER/rhostman-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "SHA_LINUX_INTEL_PLACEHOLDER"
+    end
+  end
+
+  def install
+    bin.install "rhostman"
+  end
+
+  test do
+    assert_match "rhostman", shell_output("#{bin}/rhostman --version")
+  end
+end

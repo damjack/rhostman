@@ -75,3 +75,46 @@ jobs:
         with:
           files: dist/*
           generate_release_notes: true
+
+  update-homebrew-tap:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Render formula
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          sha() { cut -d' ' -f1 "artifacts/rhostman-$1/rhostman-$1.tar.gz.sha256"; }
+
+          sed \
+            -e "s/VERSION_PLACEHOLDER/${version}/g" \
+            -e "s/SHA_MACOS_ARM_PLACEHOLDER/$(sha aarch64-apple-darwin)/" \
+            -e "s/SHA_MACOS_INTEL_PLACEHOLDER/$(sha x86_64-apple-darwin)/" \
+            -e "s/SHA_LINUX_ARM_PLACEHOLDER/$(sha aarch64-unknown-linux-gnu)/" \
+            -e "s/SHA_LINUX_INTEL_PLACEHOLDER/$(sha x86_64-unknown-linux-gnu)/" \
+            homebrew/rhostman.rb.template > rhostman.rb
+
+      - name: Push to tap
+        env:
+          TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          git clone "https://x-access-token:${TOKEN}@github.com/damjack/homebrew-rhostman.git" tap
+          cp rhostman.rb tap/Formula/rhostman.rb
+          cd tap
+          git config user.name "rhostman-release-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add Formula/rhostman.rb
+          if git diff --cached --quiet; then
+            echo "Formula already up to date"
+            exit 0
+          fi
+          git commit -m "Update rhostman to ${version}"
+          git push
